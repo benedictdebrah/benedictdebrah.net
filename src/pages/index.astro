@@ -5,16 +5,16 @@ import Link from "../components/link.astro";
 const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,gif}");
 ---
 
-<BaseLayout title="Home | Weibo Zhang">
+<BaseLayout title="Home | Benedict Debrah">
     <main class="">
         <div class="max-w-xl mx-auto">
             <h1
                 class="mt-8 mb-2 animate-in duration-700 text-4xl tracking-wide text-center md:text-7xl font-cal font text-zinc-800"
             >
-                Weibo Zhang
+                Benedict Debrah
             </h1>
             <p class="mb-4 text-sm font-light text-center text-zinc-800">
-                Traveler | Software Developer | Photographer
+                Music Lover | Software Engineer(Data & AI) | Trader
             </p>
         </div>
 
@@ -22,19 +22,21 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
             class="flex flex-col items-center justify-center max-w-2xl p-6 mx-auto my-8 border rounded-md h-fit border-zinc-100"
         >
             <p class="text-sm leading-loose text-center sm:leading-loose sm:text-base text-zinc-800 text-balance">
-                Hi, I'm Weibo. I'm a current college student studying Computer Science. In my free time, I am probably
-                dreaming of travel plans, freestyling to music, programming passion projects, journaling, and being a
-                homebody :D
+                Hi everyone! I'm Benedict Opuni Debrah, an AI Engineer at Hurisoft (NSP).
+                I currently focus on researching and building machine learning models and AI applications.
+                <br>
+                Before my current role, I worked as an AI/ML Engineer Intern at <a href="https://soccersm.ai" style="color: blue;">Soccersm</a> a product of Hurisoft.
+                In my free time, I enjoy listening to music, reading about people's experiences, browsing memes on Reddit, and learning new things. Recently, I’ve developed a love for the cloud and I'm currently exploring it. :D
             </p>
 
             <div class="flex flex-wrap justify-center gap-3 my-6">
                 <Link
                     class="text-[#0e76a8]"
-                    href="https://www.linkedin.com/in/weibozhang/"
+                    href="https://www.linkedin.com/in/kwamepuni/"
                     icon="tabler:brand-linkedin"
                     label="LinkedIn"
                 />
-                <Link href="https://github.com/Theonlyhamstertoh" icon="tabler:brand-github" label="Github" />
+                <Link href="https://github.com/benedictdebrah" icon="tabler:brand-github" label="Github" />
                 <Link
                     class="text-green-400"
                     href="https://open.spotify.com/user/eswggww5eu0qes3rs778hsrxj?si=8395e09dbdb34a56"
@@ -43,9 +45,9 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
                 />
                 <Link
                     class="text-[#5865F2]"
-                    href="https://discord.gg/sjNE8rPSMM"
-                    icon="tabler:brand-discord-filled"
-                    label="Discord"
+                    href="https://youtube.com/@benedictdebrah?si=WwvvaoVGaHHe5vMb"
+                    icon="tabler:brand-youtube"
+                    label="YouTube"
                 />
             </div>
         </div>
