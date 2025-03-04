@@ -14,10 +14,10 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
                 Benedict Debrah
             </h1>
             <p class="mb-4 text-sm font-light text-center text-zinc-800">
-                Music Lover | Software Engineer(Data & AI) | Trader
+                Music Lover | Software Engineer (Data & AI) | Trader
             </p>
         </div>
-
+        
         <div
             class="flex flex-col items-center justify-center max-w-2xl p-6 mx-auto my-8 border rounded-md h-fit border-zinc-100"
         >
@@ -28,7 +28,9 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
                 Before my current role, I worked as an AI/ML Engineer Intern at <a href="https://soccersm.ai" style="color: blue;">Soccersm</a> a product of Hurisoft.
                 In my free time, I enjoy listening to music, reading about people's experiences, browsing memes on Reddit, and learning new things. Recently, I’ve developed a love for the cloud and I'm currently exploring it. :D
             </p>
-
+            <br>
+            <br>
+            
             <div class="flex flex-wrap justify-center gap-3 my-6">
                 <Link
                     class="text-[#0e76a8]"
@@ -51,7 +53,19 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
                 />
             </div>
         </div>
-        <div class="max-w-6xl mx-auto columns-3xs">
+        <div
+            class="flex flex-col items-center justify-center max-w-2xl p-6 mx-auto my-8 border rounded-md h-fit border-zinc-100"
+        >
+        <p class="text-sm leading-loose text-center sm:leading-loose sm:text-base text-zinc-800 text-balance">
+            <i>I actually have alot of blog posts over the years on my Notion(Beacuse my previous site renders notion pages but this uses markdown) but i have not gotten the time to transfer them yet i will do it when i am less busy.</i>
+        </p>
+                
+            
+        </div>
+        
+
+        <!-- Uncomment this if you want to add images -->
+        <!-- <div class="max-w-6xl mx-auto columns-3xs">
             {
                 imageFiles.map((img) => (
                     <Image
@@ -63,16 +77,17 @@ const imageFiles = await Astro.glob("/src/static/images/gallery/*{jpeg,jpg,png,g
                     />
                 ))
             }
-        </div>
+        </div> -->
         <div class="mx-auto max-w-md">
-            <iframe
-                style="border-radius:12px"
-                src="https://open.spotify.com/embed/track/0EpH84Gd5z9xDavnWowfaC?utm_source=generator&theme=0"
-                width="100%"
-                height="152"
-                allowfullscreen=""
-                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"></iframe>
+            <iframe 
+                style="border-radius:12px" 
+                src="https://open.spotify.com/embed/track/3s7MCdXyWmwjdcWh7GWXas?utm_source=generator" 
+                width="100%" height="152" 
+                frameBorder="0" 
+                allowfullscreen="" 
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+                loading="lazy"
+            ></iframe>
         </div>
     </main>
 </BaseLayout>
