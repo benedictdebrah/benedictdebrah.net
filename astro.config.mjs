@@ -23,7 +23,7 @@ export default defineConfig({
         icon(),
     ],
     output: "static",
-    site: "https://weibozhang.com/",
+    site: "http://localhost:3000",
     adapter: vercel({
         webAnalytics: {
             enabled: true,
