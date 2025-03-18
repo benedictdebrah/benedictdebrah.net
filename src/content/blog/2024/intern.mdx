@@ -1,0 +1,40 @@
+---
+title: "My Experience as an AI/ML Engineer Intern"
+date: "2024-01-04"
+published: true
+authors: ["default"]
+---
+
+Today, I feel like writing about my experience as an intern in an AI startup. I'll talk about the phases, experiences, and how great it was (Sep 2023 to Dec 2023).
+
+My role as an ML Engineer involved working on an interesting project. Just to give an overview, this is an AI company that focuses on using ML and AI for soccer predictions. I remember listening to a data science podcast on Spotify where a professional shared his experience in the field of data science and his work on projects leveraging AI in soccer predictions. I never thought I would get the opportunity to work on a niche like this, but here I am.
+
+ML Engineers have diverse roles depending on the company, but there are general responsibilities that cut across most companies. As a sophomore student, I used to think ML Engineers were heavy coders (nerds) building algorithms and working with a lot of math. However, I've come to realize that it varies by role. One thing to know is that when you're hired at a company, your job is to solve business problems, and there should be measurable metrics from your work; otherwise, you're useless. It's not about building fancy models and algorithms just for the sake of it.
+
+After receiving my offer and signing, I had a call with my manager where we discussed what the schedule and tasks would be like. I was introduced to their remote environment (Slack, ClickUp, cloud platform) and given access to their private GitHub projects. I asked some questions, and we also talked a little about life, as he was really cool even though he's kind of introverted.
+
+The company is an AI startup that focuses on using advanced analytics and AI to predict football outcomes. I believe new features and products are going to be launched soon.
+
+My meeting times were Tuesdays and Thursdays. Tuesdays were for the data team, and Thursdays were for the whole team where we discussed progress, asked questions, and planned ahead. Everyone's tasks with deadlines were on ClickUp, where we updated progress.
+
+On my dashboard, I had three main tasks. I think the most challenging one was in the first month. In the first month, I had to read research papers on the problem we were working on (yeah, I was also surprised). This was to find research and methods to solve the problem at hand because there's nothing new under the sun. During this process, I read more papers and took notes, trying to find out why some methods work and others do not, understanding the thought process, and trying to figure out optimal solutions. I think this took about three weeks to complete.
+
+The next task was to derive a plan or methodology to implement the possible solutions. This also involved some research and implementing it on a small scale to see how the process would be before the main implementation. All of this was discussed and corrected during weekly meetings with my manager. I was learning a lot on the job and being assisted by my manager's experience. I think this took three weeks as well. Note that everything I researched is saved in resources where it can be used in the future.
+
+After my tasks were marked as completed on the dashboard, here came the moment I was waiting for—what I thought the whole internship would be about: building models to solve real-world problems. Before this, my experience with ML Engineering and data science was when I was a junior ML Engineer for a project in India (remotely), and before that, I became the lead for Omdena Accra, where we worked on open-source projects to solve problems for NGOs. I was managing a team of 15 people globally, consisting of doctors and professionals (my experience with Omdena will be documented later and how it helped me in my career).
+
+So, back to the implementation of my past research that I had been doing for the past months. This process was a cycle because I was going back and forth. I was given access to the data platform—not the normal data we use from Kaggle or elsewhere. I had to retrieve the data that would be used based on the proposed methodology. I think this phase was the most exhausting part. Cleaning this dataset with care was really important because if I moved on with garbage to feed the model, I would get garbage as an output. Cleaning data and attending meetings was a repeated cycle until we got the cleaned data we wanted. I moved on to feature engineering, and with this process, there wasn't a general approach because every mathematical model or algorithm has assumptions. So, while performing feature engineering, I made sure not to violate the assumptions after considering everything here and also domain knowledge (there were some features that we had to exclude because they were likely to cause data leakage).
+
+Here, the code had to be refactored to be reproducible in the future and also since this will be part of our automation pipeline. I did that and started building models, training models, making predictions, and testing them locally while also considering domain knowledge. This was done back and forth for some weeks before improved performance on the work, and we decided to test it with ongoing match data. This was not the production stage but the staging stage. As this process was going on, we monitored important logs from the model.
+
+Also, during one of our meetings, I was assigned with one developer to learn about Airflow and Docker. To be honest, that was my first time hearing about Airflow. I knew about Docker because some of my friends used it and got me introduced to it, but I had never used it in any of my projects. After the meeting, I spent some time reading about it. Installing Airflow locally is damn annoying. So, I had to use the Docker route. I took a course on Udemy by Marc Lamberti and read some articles so I knew what I had to know to get my way around it. The rest was found in the documentation and Stack Overflow. The Airflow was to automate the process of feature engineering and model training.
+
+Just realized I didn't say the problem we were solving. I can give little details. There is an existing model the company is working with, so my job was basically related to building a new one, understanding the process, and deriving insights on what can be done to improve performance. Based on the research I did, there was enough information on how to achieve this, and we were able to improve the model.
+
+Also, during the last weeks, I performed some clustering on our data. This provided crucial insights. During my last meeting, my manager congratulated me and gave me feedback on my impact and some things I could work on to be even better. I also received an offer to do my national service there.
+
+I really appreciate the opportunity to be in an environment where everything was friendly, like a family space. I didn't get the chance to meet other teammates because it was remote, but I really cherished the meetings, lively sessions, and happy moments.
+
+**Not related but tools I used:** Python, TensorFlow, FastAPI, Airflow, Docker, AWS, and the Internet.
+
+_Edit: I received a call on May 14th asking if I would be available to work on a project. I accepted the offer and am currently working as a contractor before I start my National Service._
