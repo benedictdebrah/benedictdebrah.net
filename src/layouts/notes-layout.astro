@@ -1,0 +1,36 @@
+---
+import FormattedDate from "../components/formatted-date.astro";
+type Props = { frontmatter: NotesType };
+import BaseLayout from "./base-layout.astro";
+import type { NotesType } from "../content/config";
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title}>
+    <div class="max-w-3xl w-full mx-auto">
+        <main class="prose prose-p:font-light prose-p:text-zinc-900 dark:prose-invert dark:prose-p:text-zinc-200">
+            <div class="my-8">
+                <h1 class="mb-0">{frontmatter.title}</h1>
+                <FormattedDate date={new Date(frontmatter.date)} />
+                {frontmatter.tags && frontmatter.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-2 mt-3">
+                        {frontmatter.tags.map((tag) => (
+                            <a
+                                href={`/notes?tag=${encodeURIComponent(tag)}`}
+                                class="px-2 py-1 text-xs rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300 hover:bg-zinc-300 dark:hover:bg-zinc-600 transition"
+                            >
+                                {tag}
+                            </a>
+                        ))}
+                    </div>
+                )}
+                {frontmatter.description && (
+                    <p class="text-zinc-600 dark:text-zinc-400 font-light mt-3">{frontmatter.description}</p>
+                )}
+            </div>
+
+            <slot />
+        </main>
+    </div>
+</BaseLayout>

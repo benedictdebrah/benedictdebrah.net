@@ -17,11 +17,11 @@ blogs.sort((a, b) => {
             blogs.map(({ data, slug }: { data: BlogType; slug: string }) => {
                 const fullDate: Date = new Date(data.date);
                 return (
-                    <li class="p-3 my-4 border rounded-md bg-zinc-50 border-zinc-100 ">
-                        <a href={`/blog/${slug}`} class="block visited:text-fuchsia-700">
+                    <li class="p-3 my-4 border rounded-md bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700">
+                        <a href={`/blog/${slug}`} class="block visited:text-fuchsia-700 dark:visited:text-fuchsia-400 text-zinc-800 dark:text-zinc-200">
                             {data.title}
                         </a>
-                        <time class="font-light text-zinc-500 " datetime={fullDate.toISOString()}>
+                        <time class="font-light text-zinc-500 dark:text-zinc-400" datetime={fullDate.toISOString()}>
                             {fullDate.toLocaleString("en-us", {
                                 month: "long",
                                 day: "numeric",

@@ -11,7 +11,7 @@ const { Content } = await content.render();
 
 <BaseLayout title="About | Benedict Debrah">
     <div class="max-w-3xl mx-auto">
-        <main class="prose prose-p:font-light prose-p:text-zinc-900">
+        <main class="prose prose-p:font-light prose-p:text-zinc-900 dark:prose-invert dark:prose-p:text-zinc-200">
             <div class="my-8">
                 <h1 class="mb-0">{content.data.title}</h1>
                 <FormattedDate date={new Date(content.data.date)} />

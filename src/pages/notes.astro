@@ -1,0 +1,290 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/base-layout.astro";
+import type { NotesType } from "../content/config";
+
+const allNotes = await getCollection("notes", ({ data }) => {
+    return data.published === true;
+});
+
+allNotes.sort((a, b) => {
+    const dateA = a.data.date instanceof Date ? a.data.date : new Date(a.data.date);
+    const dateB = b.data.date instanceof Date ? b.data.date : new Date(b.data.date);
+    return dateB.getTime() - dateA.getTime();
+});
+
+// Get all unique tags
+const allTags = Array.from(
+    new Set(
+        allNotes.flatMap((note) => note.data.tags || [])
+    )
+).sort();
+---
+
+<BaseLayout title="Notes | Benedict Debrah">
+    <div class="max-w-4xl mx-auto">
+        <header class="mb-8">
+            <h1 class="text-4xl font-cal mb-2 text-zinc-800 dark:text-zinc-100">Technical Notes</h1>
+            <p class="text-zinc-600 dark:text-zinc-400 font-light">A collection of technical notes, snippets, and learnings</p>
+        </header>
+
+        <!-- Search and Filter Section -->
+        <div class="mb-6 space-y-4">
+            <!-- Search Input -->
+            <div class="relative">
+                <input
+                    type="text"
+                    id="search-input"
+                    placeholder="Search notes..."
+                    class="w-full px-4 py-2 border rounded-md bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-600 focus:border-zinc-200 dark:focus:border-zinc-600 text-zinc-800 dark:text-zinc-200 placeholder-zinc-400 dark:placeholder-zinc-500"
+                />
+                <svg
+                    class="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-zinc-400"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                </svg>
+            </div>
+
+            <!-- Tag Filter -->
+            <div class="flex flex-wrap gap-2">
+                <button
+                    data-tag="all"
+                    class="tag-filter active px-3 py-1 text-sm border rounded-md bg-zinc-100 dark:bg-zinc-700 border-zinc-200 dark:border-zinc-600 hover:bg-zinc-200 dark:hover:bg-zinc-600 transition text-zinc-800 dark:text-zinc-200"
+                >
+                    All
+                </button>
+                {allTags.map((tag) => (
+                    <button
+                        data-tag={tag}
+                        class="tag-filter px-3 py-1 text-sm border rounded-md bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition text-zinc-800 dark:text-zinc-200"
+                    >
+                        {tag}
+                    </button>
+                ))}
+            </div>
+
+            <!-- Sort Options -->
+            <div class="flex items-center gap-4 text-sm">
+                <label class="text-zinc-600 dark:text-zinc-400">Sort by:</label>
+                <select
+                    id="sort-select"
+                    class="px-3 py-1 border rounded-md bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 focus:outline-none focus:ring-2 focus:ring-zinc-200 dark:focus:ring-zinc-600 text-zinc-800 dark:text-zinc-200"
+                >
+                    <option value="date-desc">Newest First</option>
+                    <option value="date-asc">Oldest First</option>
+                    <option value="title-asc">Title A-Z</option>
+                    <option value="title-desc">Title Z-A</option>
+                </select>
+                <span id="results-count" class="text-zinc-500 dark:text-zinc-400 ml-auto">
+                    {allNotes.length} note{allNotes.length !== 1 ? "s" : ""}
+                </span>
+            </div>
+        </div>
+
+        <!-- Notes List -->
+        <ul id="notes-list" class="space-y-4">
+            {allNotes.map(({ data, slug }: { data: NotesType; slug: string }) => {
+                const fullDate: Date = data.date instanceof Date ? data.date : new Date(data.date);
+                const tags = data.tags || [];
+                return (
+                    <li
+                        class="note-item p-4 border rounded-md bg-zinc-50 dark:bg-zinc-800 border-zinc-100 dark:border-zinc-700 hover:border-zinc-200 dark:hover:border-zinc-600 transition"
+                        data-title={data.title.toLowerCase()}
+                        data-description={(data.description || "").toLowerCase()}
+                        data-tags={tags.join(",")}
+                        data-date={fullDate.toISOString()}
+                    >
+                        <a href={`/notes/${slug}`} class="block visited:text-fuchsia-700 dark:visited:text-fuchsia-400">
+                            <h2 class="text-xl font-semibold mb-1 text-zinc-800 dark:text-zinc-100">{data.title}</h2>
+                            {data.description && (
+                                <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-2 font-light">{data.description}</p>
+                            )}
+                        </a>
+                        <div class="flex items-center justify-between mt-3">
+                            <time
+                                class="font-light text-zinc-500 dark:text-zinc-400 text-sm"
+                                datetime={fullDate.toISOString()}
+                            >
+                                {fullDate.toLocaleString("en-us", {
+                                    month: "long",
+                                    day: "numeric",
+                                    year: "numeric",
+                                })}
+                            </time>
+                            {tags.length > 0 && (
+                                <div class="flex flex-wrap gap-1">
+                                    {tags.map((tag) => (
+                                        <span
+                                            class="px-2 py-0.5 text-xs rounded bg-zinc-200 dark:bg-zinc-700 text-zinc-700 dark:text-zinc-300"
+                                        >
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+                    </li>
+                );
+            })}
+        </ul>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden text-center py-12">
+            <p class="text-zinc-500 dark:text-zinc-400">No notes found matching your criteria.</p>
+        </div>
+    </div>
+</BaseLayout>
+
+<script>
+    const searchInput = document.getElementById("search-input") as HTMLInputElement;
+    const sortSelect = document.getElementById("sort-select") as HTMLSelectElement;
+    const notesList = document.getElementById("notes-list") as HTMLUListElement;
+    const emptyState = document.getElementById("empty-state") as HTMLDivElement;
+    const resultsCount = document.getElementById("results-count") as HTMLSpanElement;
+    const tagFilters = document.querySelectorAll(".tag-filter") as NodeListOf<HTMLButtonElement>;
+
+    // Get initial tag from URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTag = urlParams.get("tag") || "all";
+
+    let currentTag = initialTag;
+    let currentSearch = "";
+    let currentSort = "date-desc";
+
+    // Initialize tag filter from URL
+    if (initialTag !== "all") {
+        tagFilters.forEach((btn) => {
+            if (btn.dataset.tag === initialTag) {
+                btn.classList.add("active", "bg-zinc-100", "border-zinc-200");
+                btn.classList.remove("bg-zinc-50", "border-zinc-100");
+            } else {
+                btn.classList.remove("active", "bg-zinc-100", "border-zinc-200");
+                btn.classList.add("bg-zinc-50", "border-zinc-100");
+            }
+        });
+    }
+
+    function filterAndSort() {
+        const noteItems = Array.from(
+            document.querySelectorAll(".note-item")
+        ) as HTMLElement[];
+
+        let visibleNotes = noteItems.filter((item) => {
+            // Tag filter
+            const tags = item.dataset.tags?.split(",") || [];
+            const matchesTag =
+                currentTag === "all" ||
+                tags.some((tag) => tag.toLowerCase() === currentTag.toLowerCase());
+
+            // Search filter
+            const title = item.dataset.title || "";
+            const description = item.dataset.description || "";
+            const matchesSearch =
+                currentSearch === "" ||
+                title.includes(currentSearch.toLowerCase()) ||
+                description.includes(currentSearch.toLowerCase());
+
+            return matchesTag && matchesSearch;
+        });
+
+        // Sort
+        visibleNotes.sort((a, b) => {
+            switch (currentSort) {
+                case "date-desc":
+                    return (
+                        new Date(b.dataset.date || "").getTime() -
+                        new Date(a.dataset.date || "").getTime()
+                    );
+                case "date-asc":
+                    return (
+                        new Date(a.dataset.date || "").getTime() -
+                        new Date(b.dataset.date || "").getTime()
+                    );
+                case "title-asc":
+                    return (a.dataset.title || "").localeCompare(b.dataset.title || "");
+                case "title-desc":
+                    return (b.dataset.title || "").localeCompare(a.dataset.title || "");
+                default:
+                    return 0;
+            }
+        });
+
+        // Update display
+        noteItems.forEach((item) => {
+            item.style.display = visibleNotes.includes(item) ? "block" : "none";
+        });
+
+        // Show/hide empty state
+        if (visibleNotes.length === 0) {
+            notesList.style.display = "none";
+            emptyState.classList.remove("hidden");
+        } else {
+            notesList.style.display = "block";
+            emptyState.classList.add("hidden");
+        }
+
+        // Update results count
+        resultsCount.textContent = `${visibleNotes.length} note${visibleNotes.length !== 1 ? "s" : ""}`;
+
+        // Re-append sorted items
+        visibleNotes.forEach((item) => {
+            notesList.appendChild(item);
+        });
+    }
+
+    // Search input handler
+    searchInput.addEventListener("input", (e) => {
+        currentSearch = (e.target as HTMLInputElement).value;
+        filterAndSort();
+    });
+
+    // Sort select handler
+    sortSelect.addEventListener("change", (e) => {
+        currentSort = (e.target as HTMLSelectElement).value;
+        filterAndSort();
+    });
+
+    // Tag filter handlers
+    tagFilters.forEach((button) => {
+        button.addEventListener("click", () => {
+            // Update active state
+            tagFilters.forEach((btn) => {
+                btn.classList.remove("active", "bg-zinc-100", "border-zinc-200");
+                btn.classList.add("bg-zinc-50", "border-zinc-100");
+            });
+            button.classList.add("active", "bg-zinc-100", "border-zinc-200");
+            button.classList.remove("bg-zinc-50", "border-zinc-100");
+
+            // Update current tag
+            currentTag = button.dataset.tag || "all";
+            
+            // Update URL without page reload
+            const url = new URL(window.location.href);
+            if (currentTag === "all") {
+                url.searchParams.delete("tag");
+            } else {
+                url.searchParams.set("tag", currentTag);
+            }
+            window.history.pushState({}, "", url.toString());
+            
+            filterAndSort();
+        });
+    });
+
+    // Initial filter on page load
+    filterAndSort();
+</script>
+
+<style>
+    .tag-filter.active {
+        @apply bg-zinc-100 dark:bg-zinc-700 border-zinc-200 dark:border-zinc-600;
+    }
+</style>
