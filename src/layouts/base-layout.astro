@@ -22,30 +22,19 @@ const { title } = Astro.props;
         <meta name="generator" content={Astro.generator} />
         <title>{title}</title>
     </head>
-    <body class="w-full p-6 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors">
+    <body class="w-full p-4 sm:p-6 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 transition-colors">
         <Navbar />
 
         <slot />
         <Footer />
     </body>
-    
-    <script>
-        // Dark mode initialization
-        (function() {
-            const theme = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const shouldBeDark = theme === 'dark' || (!theme && prefersDark);
-            
-            if (shouldBeDark) {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
-        })();
-    </script>
 </html>
 
 <style is:global>
+    :root {
+        color-scheme: light dark;
+    }
+
     code {
         counter-reset: line;
     }
