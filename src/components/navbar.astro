@@ -6,7 +6,7 @@
 <nav class="py-4">
     <!-- <Image src={weiboLogo} alt="Weibo Blog Logo" width={150} height={150} class="mx-auto" /> -->
     <div class="flex justify-center">
-        <ul class="grid grid-cols-2 gap-1 w-full max-w-full sm:flex sm:w-auto justify-center font-light">
+        <ul class="flex flex-wrap justify-center gap-0.5 w-full font-light sm:w-auto sm:gap-1">
             <li class="nav-item">
                 <a href="/">Home</a>
             </li>
@@ -31,7 +31,7 @@
 
 <style>
     .nav-item {
-        @apply min-w-0 text-center hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:rotate-3 rounded-md hover:outline transition outline-zinc-100 dark:outline-zinc-700 py-1 px-2;
+        @apply whitespace-nowrap text-sm hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:rotate-3 rounded-md hover:outline transition outline-zinc-100 dark:outline-zinc-700 py-1 px-1.5 sm:text-base sm:px-2;
     }
     .nav-item a {
         @apply text-zinc-800 dark:text-zinc-200;
